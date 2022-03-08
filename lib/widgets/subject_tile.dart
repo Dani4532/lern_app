@@ -10,32 +10,35 @@ class SubjectTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        leading: Container(
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: Colors.blueAccent,
-              width: 2.0,
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
+      child: Card(
+        child: ListTile(
+          leading: Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(
+                color: Colors.blueAccent,
+                width: 2.0,
+              ),
+            ),
+            child: Text(
+              fullLearnSubjectList.studyTime.toString(),
+              style: const TextStyle(
+                fontSize: 20,
+              ),
             ),
           ),
-          child: Text(
-            fullLearnSubjectList.studyTime.toString(),
-            style: const TextStyle(
-              fontSize: 20,
-            ),
+          title: Text(fullLearnSubjectList.name),
+          subtitle: Text(fullLearnSubjectList.date),
+          trailing: IconButton(
+            onPressed: () {
+              delSubjectTile(fullLearnSubjectList);
+            },
+            icon: Icon(Icons.delete),
           ),
-        ),
-        title: Text(fullLearnSubjectList.name),
-        subtitle: Text(fullLearnSubjectList.date),
-        trailing: IconButton(
-          onPressed: () {
-            delSubjectTile(fullLearnSubjectList);
-          },
-          icon: Icon(Icons.delete),
         ),
       ),
     );

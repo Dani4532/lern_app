@@ -8,14 +8,15 @@ import 'package:lern_app/widgets/subject_tile.dart';
 class SubjectView extends StatelessWidget {
   final List<Subject> fullLearnSubjectList;
   final void Function(Subject delSubject) delSubjectTile;
+  final Map<String, String> progressMap;
 
-  SubjectView(this.fullLearnSubjectList, this.delSubjectTile, {Key? key})
+  SubjectView(this.fullLearnSubjectList, this.delSubjectTile, this.progressMap, {Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     
-    Map<String, String> progressMap = {for (var e in fullLearnSubjectList) e.name : e.studyTime};
+   // Map<String, String> progressMap = {for (var e in fullLearnSubjectList) e.name : e.studyTime};
     return Container(
         child: Column(
       children: [

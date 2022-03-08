@@ -22,11 +22,8 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void _updateSubjectList(Subject newSubject){
-    setState(() {
-      _fullLearnSubjectList.add(newSubject);
-    });
-  }
+
+
   @override
   Widget build(BuildContext context) {
     var subjects = [
@@ -34,17 +31,34 @@ class _HomePageState extends State<HomePage> {
       'AM',
       'NVS',
       'GGP',
+      'E',
+      'D',
+      'DBI',
+      'SYP',
+      'BWM',
     ];
 
-
+    Map<String, String> _progressMap = {for (var e in _fullLearnSubjectList) e.name : e.studyTime};
     String? dropdownValue = subjects[0];
 
+    void _updateSubjectList(Subject newSubject){
+      setState(() {
+        _fullLearnSubjectList.add(newSubject);
+        if(_progressMap.containsKey(newSubject.name)){
+          var temp = _progressMap.entries.where((element) => element.key == newSubject.name);
+          _progressMap.update(newSubject.name, (value) => (value + temp.first.value));
+          return;
+        }
+        Map<String,String> newMapEntry = { newSubject.name : newSubject.studyTime};
+        _progressMap.addAll(newMapEntry);
+      });
+    }
 
     return Scaffold(
       appBar: AppBar(
         title: Text('My studies'),
       ),
-      body: (_fullLearnSubjectList.isEmpty) ? DefaultWidget() : SubjectView(_fullLearnSubjectList, _delSubjectTile),
+      body: (_fullLearnSubjectList.isEmpty) ? DefaultWidget() : SubjectView(_fullLearnSubjectList, _delSubjectTile, _progressMap),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
