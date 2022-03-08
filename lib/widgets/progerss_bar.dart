@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:lern_app/domain/subject.dart';
 
 class ProgressBar extends StatelessWidget {
-  final List<Subject> fullLearnSubjectList;
+  final Map<String,String> progressMap;
   final int index;
 
-  const ProgressBar(this.fullLearnSubjectList, this.index, {Key? key})
+  const ProgressBar(this.progressMap, this.index, {Key? key})
       : super(key: key);
 
 
@@ -16,7 +16,7 @@ class ProgressBar extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(fullLearnSubjectList[index].name,style: TextStyle(
+          child: Text(progressMap.entries.elementAt(index).key,style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),),
@@ -26,7 +26,7 @@ class ProgressBar extends StatelessWidget {
             quarterTurns: 3,
             child: LinearProgressIndicator(
               minHeight: 10,
-              value: 0.3,
+              value: int.parse(progressMap.entries.elementAt(index).value) / 100,
             ),
           ),
         ),

@@ -15,6 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Subject> _fullLearnSubjectList = [];
 
+
   void _delSubjectTile(Subject delSubject){
     setState(() {
         _fullLearnSubjectList.remove(delSubject);
@@ -34,6 +35,7 @@ class _HomePageState extends State<HomePage> {
       'NVS',
       'GGP',
     ];
+
 
     String? dropdownValue = subjects[0];
 
