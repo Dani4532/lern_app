@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:lern_app/domain/subject.dart';
 import 'package:lern_app/widgets/subject_tile.dart';
 
@@ -18,21 +20,24 @@ class SubjectView extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: LinearProgressIndicator(
-
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(fullLearnSubjectList[0].name),
+                    ),
+                    Expanded(
+                      child: RotatedBox(
+                        quarterTurns: 3,
+                        child: LinearProgressIndicator(
+                            minHeight: 10,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-             /* LinearProgressIndicator(
-                minHeight: 1000,
-              ),
-              LinearProgressIndicator(
-                minHeight: 1000,
-              ),
-              LinearProgressIndicator(
-                minHeight: 1000,
-              ),
-
-              */
+              
             ],
           ),
         ),
