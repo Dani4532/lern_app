@@ -56,7 +56,6 @@ class _HomePageState extends State<HomePage> {
         _fullLearnSubjectList.add(newSubject);
 
         if(_progressMap.containsKey(newSubject.name)){
-          var temp = _progressMap.entries.where((element) => element.key == newSubject.name);
           _progressMap.update(newSubject.name, (value) => ((int.parse(value) + int.parse(newSubject.studyTime)).toString()));
         }
 

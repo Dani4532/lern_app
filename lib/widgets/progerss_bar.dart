@@ -12,7 +12,7 @@ class ProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double fillProgressBar(){
-      return double.parse(progressMap.values.elementAt(index)) / progressMap.length;
+      return (double.parse(progressMap.values.elementAt(index)) / progressMap.length) / 100;
     }
     return Column(
       children: [
@@ -41,8 +41,8 @@ class ProgressBar extends StatelessWidget {
             quarterTurns: 3,
             child: LinearProgressIndicator(
               minHeight: 10,
-              value:
-                  int.parse(progressMap.entries.elementAt(index).value) / 100,
+              value: fillProgressBar(),
+                  //int.parse(progressMap.entries.elementAt(index).value) / 100,
             ),
           ),
         ),
