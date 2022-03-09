@@ -7,8 +7,13 @@ class ProgressBar extends StatelessWidget {
 
   const ProgressBar(this.progressMap, this.index, {Key? key}) : super(key: key);
 
+
+
   @override
   Widget build(BuildContext context) {
+    double fillProgressBar(){
+      return double.parse(progressMap.values.elementAt(index)) / progressMap.length;
+    }
     return Column(
       children: [
         Padding(

@@ -15,12 +15,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Subject> _fullLearnSubjectList = [];
 
+  Map<String, String> _progressMap = {};
 
-  void _delSubjectTile(Subject delSubject){
-    setState(() {
-        _fullLearnSubjectList.remove(delSubject);
-    });
-  }
+
 
 
 
@@ -38,21 +35,35 @@ class _HomePageState extends State<HomePage> {
       'BWM',
     ];
 
-    Map<String, String> _progressMap = {for (var e in _fullLearnSubjectList) e.name : e.studyTime};
+
     String? dropdownValue = subjects[0];
+
+    void _delSubjectTile(Subject delSubject){
+      setState(() {
+        _fullLearnSubjectList.remove(delSubject);
+        if(_progressMap.keys.contains(delSubject.name)){
+          var temp = _progressMap.entries.where((element) => element.key == delSubject.name);
+          _progressMap.update(delSubject.name, (value) => ((int.parse(value) - int.parse(delSubject.studyTime)).toString()));
+          if(int.parse(temp.first.value) == 0){
+            _progressMap.removeWhere((key, value) => key == delSubject.name);
+          }
+        }
+      });
+    }
 
     void _updateSubjectList(Subject newSubject){
       setState(() {
         _fullLearnSubjectList.add(newSubject);
+
         if(_progressMap.containsKey(newSubject.name)){
           var temp = _progressMap.entries.where((element) => element.key == newSubject.name);
-          _progressMap.update(newSubject.name, (value) => (value + temp.first.value));
-          return;
+          _progressMap.update(newSubject.name, (value) => ((int.parse(value) + int.parse(newSubject.studyTime)).toString()));
         }
-        Map<String,String> newMapEntry = { newSubject.name : newSubject.studyTime};
-        _progressMap.addAll(newMapEntry);
+
+        _progressMap.putIfAbsent(newSubject.name, () => newSubject.studyTime);
       });
     }
+
 
     return Scaffold(
       appBar: AppBar(
