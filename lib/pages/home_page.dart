@@ -17,10 +17,6 @@ class _HomePageState extends State<HomePage> {
 
   Map<String, String> _progressMap = {};
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
     var subjects = [
@@ -35,40 +31,53 @@ class _HomePageState extends State<HomePage> {
       'BWM',
     ];
 
-
     String? dropdownValue = subjects[0];
 
-    void _delSubjectTile(Subject delSubject){
+    void _delSubjectTile(Subject delSubject) {
       setState(() {
         _fullLearnSubjectList.remove(delSubject);
-        if(_progressMap.keys.contains(delSubject.name)){
-          var temp = _progressMap.entries.where((element) => element.key == delSubject.name);
-          _progressMap.update(delSubject.name, (value) => ((int.parse(value) - int.parse(delSubject.studyTime)).toString()));
-          if(int.parse(temp.first.value) == 0){
+        if (_progressMap.keys.contains(delSubject.name)) {
+          var temp = _progressMap.entries
+              .where((element) => element.key == delSubject.name);
+          _progressMap.update(
+              delSubject.name,
+              (value) => ((int.parse(value) - int.parse(delSubject.studyTime))
+                  .toString()));
+
+          if (int.parse(temp.first.value) == 0) {
             _progressMap.removeWhere((key, value) => key == delSubject.name);
           }
         }
       });
     }
 
-    void _updateSubjectList(Subject newSubject){
+    void _updateSubjectList(Subject newSubject) {
       setState(() {
         _fullLearnSubjectList.add(newSubject);
 
-        if(_progressMap.containsKey(newSubject.name)){
-          _progressMap.update(newSubject.name, (value) => ((int.parse(value) + int.parse(newSubject.studyTime)).toString()));
+        if (_progressMap.containsKey(newSubject.name)) {
+          _progressMap.update(
+              newSubject.name,
+              (value) => ((int.parse(value) + int.parse(newSubject.studyTime))
+                  .toString()));
         }
 
         _progressMap.putIfAbsent(newSubject.name, () => newSubject.studyTime);
+        var sortedMap = Map.fromEntries(_progressMap.entries.toList()
+          ..sort(
+              (e1, e2) => int.parse(e2.value).compareTo(int.parse(e1.value))));
+        _progressMap.clear();
+        _progressMap.addAll(sortedMap);
       });
     }
-
 
     return Scaffold(
       appBar: AppBar(
         title: Text('My studies'),
       ),
-      body: (_fullLearnSubjectList.isEmpty) ? DefaultWidget() : SubjectView(_fullLearnSubjectList, _delSubjectTile, _progressMap),
+      body: (_fullLearnSubjectList.isEmpty)
+          ? DefaultWidget()
+          : SubjectView(_fullLearnSubjectList, _delSubjectTile, _progressMap),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(

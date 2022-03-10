@@ -8,14 +8,15 @@ class ProgressBar extends StatelessWidget {
   const ProgressBar(this.progressMap, this.index, {Key? key}) : super(key: key);
 
 
+  double fillProgressBar(){
+    var sum = 0;
+    progressMap.values.forEach((element) {sum += int.parse(element);});
+    return  (double.parse(progressMap.values.elementAt(index)) / sum);
+  }
 
   @override
   Widget build(BuildContext context) {
-    double fillProgressBar(){
-      var sum = 0;
-      progressMap.values.forEach((element) {sum += int.parse(element);});
-      return  (double.parse(progressMap.values.elementAt(index)) / sum);
-    }
+
     return Column(
       children: [
         Padding(

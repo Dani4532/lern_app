@@ -9,31 +9,32 @@ class SubjectView extends StatelessWidget {
   final void Function(Subject delSubject) delSubjectTile;
   final Map<String, String> progressMap;
 
-  SubjectView(this.fullLearnSubjectList, this.delSubjectTile, this.progressMap, {Key? key})
+  SubjectView(this.fullLearnSubjectList, this.delSubjectTile, this.progressMap,
+      {Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
-        child: Column(
-      children: [
-        Expanded(
-          //singelChildeScrollfield
-          child: ListView.builder(
-            itemBuilder: (_, index) => ProgressBar(progressMap, index),
-            itemCount: progressMap.length,
-            scrollDirection: Axis.horizontal,
+      child: Column(
+        children: [
+          Expanded(
+            //singelChildeScrollfield
+            child: ListView.builder(
+              itemBuilder: (_, index) => ProgressBar(progressMap, index),
+              itemCount: progressMap.length,
+              scrollDirection: Axis.horizontal,
+            ),
           ),
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemBuilder: (_, index) =>
-                SubjectTile(fullLearnSubjectList[index], delSubjectTile),
-            itemCount: fullLearnSubjectList.length,
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (_, index) =>
+                  SubjectTile(fullLearnSubjectList[index], delSubjectTile),
+              itemCount: fullLearnSubjectList.length,
+            ),
           ),
-        ),
-      ],
-    ));
+        ],
+      ),
+    );
   }
 }
