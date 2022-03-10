@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lern_app/domain/subject.dart';
+
 
 class ProgressBar extends StatelessWidget {
   final Map<String, String> progressMap;
@@ -12,7 +12,9 @@ class ProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double fillProgressBar(){
-      return (double.parse(progressMap.values.elementAt(index)) / progressMap.length) / 100;
+      var sum = 0;
+      progressMap.values.forEach((element) {sum += int.parse(element);});
+      return  (double.parse(progressMap.values.elementAt(index)) / sum);
     }
     return Column(
       children: [

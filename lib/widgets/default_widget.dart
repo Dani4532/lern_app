@@ -6,10 +6,16 @@ class DefaultWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.topCenter,
+      alignment: Alignment.center,
       child: Padding(
         padding: EdgeInsets.all(8.0),
-        child: Text('Study some'),
+        child: Text(
+          'Study Some',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }
